@@ -49,5 +49,5 @@ const signup = (schema: any, req: Request): AuthResponse | Response => {
 
 export default {
     login,
-    signup
+    signup,
 };
