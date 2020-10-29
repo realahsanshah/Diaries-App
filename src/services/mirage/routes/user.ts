@@ -47,4 +47,5 @@ const signup = (schema: any, req: Request): AuthResponse | Response => {
     };
 };
 
-export default {login,signup};
+const user= {login,signup}
+export default user;
