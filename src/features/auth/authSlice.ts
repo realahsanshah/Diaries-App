@@ -20,7 +20,7 @@ const auth = createSlice({
             }
         },
         clearToken(state){
-            state.token=null,
+            state.token=null
         },
         setAuthState(state,{payload}:PayloadAction<boolean>){
             state.isAuthenticated=payload;
