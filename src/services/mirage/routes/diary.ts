@@ -4,6 +4,7 @@ import { Entry } from '../../../interfaces/entry.interface';
 import { Diary } from '../../../interfaces/diary.interface';
 import { User } from '../../../interfaces/user.interface';
 import dayjs from 'dayjs';
+import Schema from 'miragejs/orm/schema';
 
 
 export const create = (schema: any, req: Request): { user: User, diary: Diary } | Response => {
@@ -104,5 +105,24 @@ export const getEntries=(schema:any,req:Request):{entries:Entry[]}|Response=>{
     }
     catch(error){
         return handleErrors(error,'Failed to get Diary entries.')
+    }
+}
+
+
+export const updateEntry=(schema:any,req:Request):Entry|Response=>{
+    try{
+        const entry=schema.entries.find(req.params.id);
+        const data=JSON.parse(req.requestBody) as Partial<Entry>;
+        const now=dayjs().format();
+
+        entry.update({
+            ...data,
+            updatedAt:now
+        });
+
+        return entry.attrs as Entry;
+
+    }catch(error){
+        return handleErrors(error,"Failed to update diary");
     }
 }
