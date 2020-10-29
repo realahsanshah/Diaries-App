@@ -38,3 +38,21 @@ export const create = (schema: any, req: Request): { user: User, diary: Diary } 
     }
 }
 
+
+export const updateDiary=(schema:any,req:Request):Diary|Response=>{
+    try{
+        const diary=schema.diaries.find(req.params.id);
+        const data=JSON.parse(req.requestBody) as Partial<Diary>;
+        const now =dayjs().format();
+        
+        diary.update({
+            ...data,
+            updatedAt:now,
+        });
+
+        return diary.attrs as Diary;
+
+    }catch(error){
+        return handleErrors(error,'Failed to Update Diary');
+    }
+}
