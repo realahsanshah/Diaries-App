@@ -96,3 +96,13 @@ export const addEntry = (schema: any, req: Request): { diary: Diary, entry: Entr
         return handleErrors(error, "Failed to save entry");
     }
 }
+
+export const getEntries=(schema:any,req:Request):{entries:Entry[]}|Response=>{
+    try{
+        const diary=schema.diaries.find(req.params.id);
+        return diary.entry;
+    }
+    catch(error){
+        return handleErrors(error,'Failed to get Diary entries.')
+    }
+}
