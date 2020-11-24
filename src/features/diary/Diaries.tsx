@@ -1,16 +1,16 @@
 import React, { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/rootReducer';
+import { RootState } from '../../rootReducer';
 import http from '../../services/api';
 import { Diary } from '../../interfaces/diary.interface';
-import { addDiary } from './diarySlice';
+import { addDiary } from './diariesSlice';
 import Swal from 'sweetalert2';
 import { setUser } from '../auth/userSlice';
 import DiaryTile from './DiaryTile';
 import { User } from '../../interfaces/user.interface';
 import { Route, Switch } from 'react-router-dom';
 import DiaryEntriesList from './DiaryEntriesList';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch } from '../../store';
 import dayjs from 'dayjs';
 
 const Diaries: FC = () => {

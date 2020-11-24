@@ -6,25 +6,21 @@ import http from '../../services/api';
 import { saveToken, setAuthState } from './authSlice';
 import { setUser } from './userSlice';
 import { AuthResponse } from '../../services/mirage/routes/user';
-import { useAppDispatch } from '../../store/store';
-
-
+import { useAppDispatch } from '../../store';
 
 const schema = Yup.object().shape({
     username: Yup.string()
-        .required("What? No Username?")
-        .max(16, "Username cannot be longer than 16 characters"),
+        .required('Username is required')
+        .max(16, 'Username cannot be longer than 16 characters'),
     password: Yup.string()
-        .required('Without a password, "None shall pass!"'),
-    email: Yup.string()
-        .required("Email is required")
-        .email("Please provide a valid email address (abc@xyz.com)"),
-})
+        .required("Password is required"),
+    email: Yup.string().email('Please provide a valid email address (abc@xy.z)'),
+});
+
 
 const Auth: FC = () => {
-
     const { handleSubmit, register, errors } = useForm<User>({
-        validationSchema: schema
+        validationSchema: schema,
     });
 
     const [isLogin, setIsLogin] = useState(true);
@@ -49,20 +45,22 @@ const Auth: FC = () => {
             })
             .finally(() => {
                 setLoading(false);
-            })
+            });
     }
 
     return (
-        <div className="auth">
+        <div className='auth'>
             <div className='card'>
                 <form onSubmit={handleSubmit(submitForm)}>
-                    <div className="inputWrapper">
+                    <div className='inputWrapper'>
                         <input ref={register} name="username" placeholder="Username" />
-                        {errors && errors.username && (
-                            <p className="error">{errors.username.message}</p>
-                        )}
+                        {
+                            errors && errors.username && (
+                                <p className="error">{errors.username.message}</p>
+                            )
+                        }
                     </div>
-                    <div className="inputWrapper">
+                    <div className='inputWrapper'>
                         <input
                             ref={register}
                             name="password"
@@ -100,6 +98,6 @@ const Auth: FC = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Auth;

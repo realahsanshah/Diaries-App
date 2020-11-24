@@ -1,6 +1,6 @@
 import { Response, Request } from 'miragejs';
 import { handleErrors } from '../server';
-import { User } from '../../../interfaces/user.interface'
+import { User } from '../../../interfaces/user.interface';
 import { randomBytes } from 'crypto';
 
 const generateToken = () => randomBytes(8).toString('hex');
@@ -15,17 +15,18 @@ const login = (schema: any, req: Request): AuthResponse | Response => {
     const user = schema.users.findBy({ username });
 
     if (!user) {
-        return handleErrors(null, "No user with that username exists");
+        return handleErrors(null, 'No user with that username');
     }
 
     if (password !== user.password) {
-        return handleErrors(null, "Incorrect Password");
+        return handleErrors(null, "Password is incorrect");
     }
 
     const token = generateToken();
+
     return {
         user: user.attrs as User,
-        token
+        token,
     };
 };
 
@@ -38,14 +39,17 @@ const signup = (schema: any, req: Request): AuthResponse | Response => {
     }
 
     const user = schema.users.create(data);
-
     const token = generateToken();
 
     return {
         user: user.attrs as User,
-        token
+        token,
     };
 };
 
-const user= {login,signup}
+const user={
+    login,
+    signup,
+};
+
 export default user;

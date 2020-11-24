@@ -1,10 +1,10 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { showAlert } from '../util';
 
+
 const http: AxiosInstance = axios.create({
     baseURL: 'https://diaries.app',
 });
-
 
 http.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -19,7 +19,6 @@ http.interceptors.response.use(
             response?: AxiosResponse;
             request?: XMLHttpRequest;
         } = error;
-
         if (response) {
             if (response.status >= 400 && response.status < 500) {
                 showAlert(response.data?.data?.message, 'error');
@@ -31,6 +30,6 @@ http.interceptors.response.use(
         }
         return Promise.reject(error);
     }
-)
+);
 
 export default http;

@@ -1,18 +1,18 @@
 import React, { FC, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/rootReducer';
+import { RootState } from '../../rootReducer';
 import http from '../../services/api';
 import { Entry } from '../../interfaces/entry.interface';
 import { setEntries } from '../entry/entriesSlice';
 import { setCurrentlyEditing, setCanEdit } from '../entry/editorSlice';
 import dayjs from 'dayjs';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch } from '../../store';
 
 const DiaryEntriesList: FC = () => {
   const { entries } = useSelector((state: RootState) => state);
   const dispatch = useAppDispatch();
-  const { id }:any = useParams();
+  const {id}:any=useParams();
 
   useEffect(() => {
     if (id != null) {
