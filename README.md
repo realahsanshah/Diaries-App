@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Live Link
+[Surge Link](http://realsashah-bootcamp-diaries-app.surge.sh/)
+
+[Netlify Link](https://diaries-app-by-realsashah.netlify.app/)
+
 ## Available Scripts
 
 In the project directory, you can run:
